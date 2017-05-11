@@ -1,0 +1,45 @@
+def graph_search_acotacion(problem,diccionario):
+    closed = {}
+    diccionario.append(Node(problem.initial))
+    while diccionario:
+        node = diccionario.pop()
+        if problem.goal_test(node.state):
+            return node
+        if node.state not in closed:
+            closed[node.state] = True
+	    for nodo in exp: #insertamos los nodos a la lista abierta
+                diccionario[nodo.state] = nodo.path_cost(, node.state, action, nodo.state)
+sumamos el peso actual a cada uno de los nodos expandidos que metemos en
+la lista abierta y los añadimos
+luego ordenamos la lista por el costo
+??????? https://mail.python.org/pipermail/python-es/2004-October/005961.html
+
+#ESCRIBIR AQUI
+
+# búsqueda de ramificación y acotación
+def ramiAcota_first_graph_search(problem):
+    diccionario = {}
+    return graph_search_acotacion(problem,diccionario)
+
+#PRUEBAS
+a = {"A":38, "B":54, "D":111, "Q":4}
+a["Y"]=44
+a["R"]=0
+a["T"]=666
+print a
+
+#comentarios
+def graph_search(problem, fringe):
+    """Search through the successors of a problem to find a goal.
+    The argument fringe should be an empty queue.
+    If two paths reach a state, only use the best one. [Fig. 3.18]"""
+    closed = {}
+    fringe.append(Node(problem.initial)) #añadimos el nodo a la lista abierta
+    while fringe:
+        node = fringe.pop() #extraemos por el final de la lista abierta
+        if problem.goal_test(node.state): #si es el estado final
+            return node
+        if node.state not in closed: #si el nodo no esta en la lista cerrada
+            closed[node.state] = True #lo ponemos en la lista cerrada
+            fringe.extend(node.expand(problem)) #añadimos a la lista abierta los nodos que expandimos
+    return None
